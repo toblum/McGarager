@@ -1,9 +1,8 @@
 /**
- * IotWebConf03CustomParameters.ino -- IotWebConf is an ESP8266/ESP32
- *   non blocking WiFi/AP web configuration library for Arduino.
- *   https://github.com/prampec/IotWebConf
+ * McGarager.cpp -- Simple MQTT garage door opener with endstop detection (reed sensor)
+ * https://github.com/toblum/McGarager
  *
- * Copyright (C) 2020 Balazs Kelemen <prampec+arduino@gmail.com>
+ * Copyright (C) 2022 Tobias Blum <mcgarager@tobiasblum.de>
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
@@ -13,6 +12,7 @@
 #include <IotWebConfUsing.h> // This loads aliases for easier class names.
 #include <PubSubClient.h>
 #include <uptime_formatter.h>
+# include <ESP8266HTTPUpdateServer.h>
 
 // -- Pins
 #define RELAY_PIN 12
@@ -51,6 +51,7 @@ bool formValidator(iotwebconf::WebRequestWrapper *webRequestWrapper);
 
 DNSServer dnsServer;
 WebServer server(80);
+ESP8266HTTPUpdateServer httpUpdater;
 
 // -- MQTT client setup
 WiFiClient espClient;
@@ -100,6 +101,12 @@ void setup()
 	iotWebConf.setConfigSavedCallback(&configSaved);
 	iotWebConf.setFormValidator(&formValidator);
 	iotWebConf.getApTimeoutParameter()->visible = true;
+
+	iotWebConf.setupUpdateServer(
+		[](const char *updatePath)
+		{ httpUpdater.setup(&server, updatePath); },
+		[](const char *userName, char *password)
+		{ httpUpdater.updateCredentials(userName, password); });
 
 	// -- Initializing the configuration.
 	iotWebConf.init();
@@ -263,6 +270,9 @@ void handleRoot()
 	s += mqttServerTopicValue;
 	s += "<li>Uptime: ";
 	s += uptime_formatter::getUptime();
+	s += "<li>Free memory: ";
+	s += String(ESP.getFreeHeap());
+	s += " Bytes";
 
 	s += "</ul>";
 	s += "<p>Go to <a href='config'>configure page</a> to change values.</p>";
