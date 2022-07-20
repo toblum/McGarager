@@ -45,9 +45,10 @@ const char wifiInitialApPassword[] = "GaragerMc";
 
 // -- Method declarations.
 void handleRoot();
-// -- Callback methods.
 void configSaved();
 bool formValidator(iotwebconf::WebRequestWrapper *webRequestWrapper);
+IRAM_ATTR void handlePinChangeInterrupt();
+void publishStatus();
 
 DNSServer dnsServer;
 WebServer server(80);
@@ -57,6 +58,7 @@ ESP8266HTTPUpdateServer httpUpdater;
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 unsigned long lastMqttConnectionAttempt = 0;
+bool needsStatusUpdate = false;
 bool connectMqtt();
 void mqttCallback(char *topic, byte *payload, unsigned int length);
 
@@ -87,6 +89,9 @@ void setup()
 	pinMode(RELAY_PIN, OUTPUT);
 	pinMode(OPENED_SENSOR_PIN, INPUT_PULLUP);
 	pinMode(CLOSED_SENSOR_PIN, INPUT_PULLUP);
+
+	attachInterrupt(digitalPinToInterrupt(OPENED_SENSOR_PIN), handlePinChangeInterrupt, CHANGE);
+	attachInterrupt(digitalPinToInterrupt(CLOSED_SENSOR_PIN), handlePinChangeInterrupt, CHANGE);
 
 	group1.addItem(&mqttServerHostParam);
 	group1.addItem(&mqttServerPortParam);
@@ -139,6 +144,19 @@ void loop()
 		Serial.println("MQTT (re-)connect");
 		connectMqtt();
 	}
+
+	if (needsStatusUpdate) {
+		publishStatus();
+		needsStatusUpdate = false;
+	}
+}
+
+/**
+ * Interrupt: Pin (open/closed state) changed
+ */
+IRAM_ATTR void handlePinChangeInterrupt() { 
+    Serial.println("Interrupt Detected");
+	needsStatusUpdate = true;
 }
 
 /**
@@ -239,7 +257,7 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
 	if (!strncmp((char *)payload, "status", length))
 	{
 		Serial.println("Received status");
-		publishStatus();
+		needsStatusUpdate = true;
 	}
 }
 
