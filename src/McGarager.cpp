@@ -170,10 +170,10 @@ void publishStatus()
 	String opened = (sensorOpened) ? "true" : "false";
 	String closed = (sensorClosed) ? "true" : "false";
 	long rssi = WiFi.RSSI();
-	String status = "{\"rssi\" : \"" + String(rssi) + "\", \"sensor_opened\" : \"" + opened + "\", \"sensor_closed\" : \"" + closed + "\"}";
+	String status = "{\"rssi\" : \"" + String(rssi) + "\", \"memory\" : \"" + String(ESP.getFreeHeap()) + "\", \"uptime\" : \"" + uptime_formatter::getUptime() + "\", \"sensor_opened\" : \"" + opened + "\", \"sensor_closed\" : \"" + closed + "\"}";
 	// Serial.println(status);
 
-	char message_buff[128];
+	char message_buff[256];
 	status.toCharArray(message_buff, status.length() + 1);
 
 	char topicStatus[STRING_LEN + 7];
