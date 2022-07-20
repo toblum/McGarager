@@ -58,6 +58,7 @@ ESP8266HTTPUpdateServer httpUpdater;
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 unsigned long lastMqttConnectionAttempt = 0;
+unsigned long pinChangeDebounceTimeout = 0;
 bool needsStatusUpdate = false;
 bool connectMqtt();
 void mqttCallback(char *topic, byte *payload, unsigned int length);
@@ -145,7 +146,7 @@ void loop()
 		connectMqtt();
 	}
 
-	if (needsStatusUpdate) {
+	if (needsStatusUpdate && pinChangeDebounceTimeout < millis()) {
 		publishStatus();
 		needsStatusUpdate = false;
 	}
@@ -156,6 +157,7 @@ void loop()
  */
 IRAM_ATTR void handlePinChangeInterrupt() { 
     Serial.println("Interrupt Detected");
+	pinChangeDebounceTimeout = millis() + 1000;
 	needsStatusUpdate = true;
 }
 
