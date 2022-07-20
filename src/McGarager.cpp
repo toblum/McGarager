@@ -12,6 +12,7 @@
 #include <IotWebConf.h>
 #include <IotWebConfUsing.h> // This loads aliases for easier class names.
 #include <PubSubClient.h>
+#include <uptime_formatter.h>
 
 // -- Pins
 #define RELAY_PIN 12
@@ -128,7 +129,7 @@ void loop()
 
 	if ((iotWebConf.getState() == iotwebconf::OnLine) && (!mqttClient.connected()))
 	{
-		Serial.println("MQTT reconnect");
+		Serial.println("MQTT (re-)connect");
 		connectMqtt();
 	}
 }
@@ -248,7 +249,7 @@ void handleRoot()
 	}
 
 	String s = "<!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/>";
-	s += "<title>McGarager</title></head><body style=\"font-family:Arial;\"><h1>McGarager</h1>";
+	s += "<title>McGarager v2</title></head><body style=\"font-family:Arial;\"><h1>McGarager v2</h1>";
 	s += "<ul>";
 	s += "<li>MQTT hostname: ";
 	s += mqttServerHostValue;
@@ -260,9 +261,12 @@ void handleRoot()
 	s += mqttServerPassValue;
 	s += "<li>MQTT topic: ";
 	s += mqttServerTopicValue;
+	s += "<li>Uptime: ";
+	s += uptime_formatter::getUptime();
 
 	s += "</ul>";
-	s += "Go to <a href='config'>configure page</a> to change values.";
+	s += "<p>Go to <a href='config'>configure page</a> to change values.</p>";
+	s += "<p>GitHub: <a href='https://github.com/toblum/McGarager' target='_blank'>https://github.com/toblum/McGarager</a></p>";
 	s += "</body></html>\n";
 
 	server.send(200, "text/html", s);

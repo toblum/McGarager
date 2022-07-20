@@ -10,6 +10,7 @@
             "includePath": [
                 "c:/Users/tblum/DEV/McGarager/include",
                 "c:/Users/tblum/DEV/McGarager/src",
+                "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/Uptime Library/src",
                 "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/IotWebConf/src",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS/src",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM",
@@ -59,6 +60,7 @@
                 "path": [
                     "c:/Users/tblum/DEV/McGarager/include",
                     "c:/Users/tblum/DEV/McGarager/src",
+                    "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/Uptime Library/src",
                     "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/IotWebConf/src",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS/src",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM",
@@ -105,7 +107,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60101",
+                "PLATFORMIO=60103",
                 "ESP8266",
                 "ARDUINO_ARCH_ESP8266",
                 "ARDUINO_ESP8266_NODEMCU_ESP12E",
