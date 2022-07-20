@@ -10,6 +10,7 @@
             "includePath": [
                 "c:/Users/tblum/DEV/McGarager/include",
                 "c:/Users/tblum/DEV/McGarager/src",
+                "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPUpdateServer/src",
                 "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/Uptime Library/src",
                 "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/IotWebConf/src",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS/src",
@@ -26,7 +27,6 @@
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266AVRISP/src",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPClient/src",
-                "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPUpdateServer/src",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266LLMNR",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266NetBIOS",
                 "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266SSDP",
@@ -60,6 +60,7 @@
                 "path": [
                     "c:/Users/tblum/DEV/McGarager/include",
                     "c:/Users/tblum/DEV/McGarager/src",
+                    "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPUpdateServer/src",
                     "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/Uptime Library/src",
                     "c:/Users/tblum/DEV/McGarager/.pio/libdeps/nodemcuv2/IotWebConf/src",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS/src",
@@ -76,7 +77,6 @@
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266AVRISP/src",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPClient/src",
-                    "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266HTTPUpdateServer/src",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266LLMNR",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266NetBIOS",
                     "C:/Users/tblum/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266SSDP",
